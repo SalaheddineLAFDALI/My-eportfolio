@@ -1,0 +1,460 @@
+:root {
+    --primary-color: #004d99; /* ENSEEIHT Dark Blue */
+    --secondary-color: #f0f0f0; 
+    --text-color: #333;
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Couleurs pour l'animation de fond */
+    --line-color: #19e6ca; /* Bleu Cyan Lumineux */
+    --bg-animation: #0b0f19; /* Fond très sombre */
+}
+
+/* --- Généralités et Réinitialisation --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    min-height: 100vh;
+    
+    /* FOND DE L'ANIMATION */
+    background: var(--bg-animation); 
+    overflow-x: hidden; 
+}
+
+/* --- Animation des lignes (Digital Rain) --- */
+.line {
+    position: absolute;
+    width: 2px;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--line-color), transparent);
+    opacity: 0.8;
+    z-index: 0; 
+    pointer-events: none; 
+    animation: move 3s linear infinite;
+}
+
+@keyframes move {
+    from {
+        transform: translateY(-200px) translateX(0);
+    }
+    to {
+        transform: translateY(calc(100vh + 800px)) translateX(0);
+    }
+}
+
+/* --- Header Global (COMPLÈTEMENT TRANSPARENT) --- */
+.header {
+    background-color: transparent; 
+    box-shadow: none; 
+    position: relative; 
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 5px; 
+}
+
+/* Section du Haut (Logo + Photo) */
+.header-top-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}
+
+/* --- Logo & Photo --- */
+.logo-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo.horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #fff; /* Blanc pour le contraste */
+    line-height: 1.1;
+    margin-top: 10px; 
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); 
+}
+.logo .full-name { margin-right: 15px; }
+.profile-placeholder {
+    width: 60px; height: 60px; border-radius: 50%;
+    overflow: hidden; border: 3px solid #fff; 
+    box-shadow: 0 0 10px rgba(0,255,255,0.8);
+}
+.profile-placeholder .profile-pic {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+}
+
+/* --- Navigation Principale (GEORGIA BOLD) --- */
+.navbar {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    width: 100%; background-color: #fff; 
+    padding: 0 10px; border-bottom: 1px solid #eee; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.nav-button {
+    background-color: transparent; border: none; color: var(--text-color);
+    padding: 10px 15px; cursor: pointer; font-size: 0.95em;
+    font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold; 
+    transition: all 0.3s ease; border-bottom: 2px solid transparent; 
+    white-space: nowrap;
+}
+.nav-button.active {
+    color: var(--primary-color); border-bottom: 2px solid var(--primary-color); font-weight: bold;
+}
+
+/* --- Contenu Principal (Sections) --- */
+.content-container {
+    max-width: 1200px; margin: 30px auto; padding: 0 20px;
+}
+.tab-content {
+    background-color: #fff; 
+    padding: 40px; border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: none;
+}
+.tab-content.active { display: block; }
+.tab-content h2 {
+    color: var(--primary-color); margin-bottom: 20px;
+    border-bottom: 1px solid #eee; padding-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold;
+}
+
+/* --- Sous-Navigation Semestres (Styles inchangés) --- */
+.sub-navbar {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    background-color: #f8f8f8; border-radius: 5px;
+    padding: 5px; margin-bottom: 20px; border: 1px solid #eee;
+}
+.sub-nav-button {
+    background-color: transparent; border: none; color: var(--text-color);
+    padding: 8px 12px; cursor: pointer; font-size: 0.9em;
+    font-weight: 500; transition: all 0.3s ease; border-radius: 4px; margin: 2px;
+}
+.sub-nav-button.active {
+    background-color: var(--primary-color); color: #fff; font-weight: bold;
+}
+.semester-tabs-container { padding-top: 15px; border-top: 1px solid #eee; }
+.semester-content { display: none; padding: 10px 0; }
+.semester-content.active { display: block; }
+.semester-content h3 {
+    color: #38761d; margin-bottom: 15px; font-family: Georgia, 'Times New Roman', Times, serif; 
+}
+
+
+/* --- Styles pour les Modules Accordéon --- */
+.module-item {
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.module-title {
+    width: 100%;
+    background-color: #f4f4f4;
+    color: var(--primary-color);
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.module-title:hover {
+    background-color: #e8e8e8;
+}
+
+.module-title.expanded {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.module-title.expanded .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.module-details {
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    display: none; /* Caché par défaut */
+}
+
+.module-details p {
+    margin-bottom: 0;
+    font-size: 0.9em;
+}
+
+/* ----------------------------------------------------------------- */
+/* --- NOUVEAU : Styles pour la section International Mobility --- */
+/* ----------------------------------------------------------------- */
+.mobility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 1 ou 2 colonnes selon la taille */
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.mobility-item {
+    display: flex;
+    flex-direction: column; /* Image au-dessus, texte en dessous par défaut */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.mobility-image-container {
+    width: 100%;
+    height: 200px; /* Hauteur fixe pour les images */
+    overflow: hidden;
+}
+
+.mobility-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Assure que l'image couvre le conteneur */
+    object-position: center;
+    transition: transform 0.3s ease; /* Effet de zoom au survol */
+}
+
+.mobility-item:hover .mobility-pic {
+    transform: scale(1.05);
+}
+
+.mobility-description {
+    padding: 15px;
+    background-color: #fcfcfc;
+}
+
+.mobility-description h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: var(--font-family);
+    font-size: 1.2em;
+}
+
+.mobility-description p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+
+/* --- Mise en page de la section Welcome & Responsive --- */
+.welcome-grid { display: flex; gap: 30px; align-items: flex-start; }
+.presentation-text { flex: 1; min-width: 300px; }
+.video-container { flex: 1; }
+.video-ratio-box {
+    position: relative; width: 100%; padding-bottom: 56.25%; height: 0; 
+    overflow: hidden; border-radius: 5px; 
+}
+.video-ratio-box .local-video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 5px; 
+}
+@media (max-width: 850px) { .welcome-grid { flex-direction: column; } }
+@media (max-width: 768px) {
+    .logo.horizontal { font-size: 1.8em; } .profile-placeholder { width: 50px; height: 50px; }
+    .navbar { overflow-x: auto; justify-content: flex-start; padding-bottom: 5px; }
+    .nav-button { flex-shrink: 0; }
+    .sub-navbar { justify-content: flex-start; overflow-x: auto; } .sub-nav-button { flex-shrink: 0; }
+    .mobility-item { flex-direction: column; } /* Sur mobile, les items de mobilité passent en colonne */
+    .mobility-image-container { height: 180px; } /* Hauteur réduite pour les images mobiles */
+}
+@media (max-width: 500px) {
+    .logo.horizontal { font-size: 1.5em; } .profile-placeholder { width: 45px; height: 45px; }
+}
+/* 🌟 Image Popup Fullscreen (Lightbox) */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 40px;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(3px);
+}
+
+.image-modal img {
+    display: block;
+    margin: auto;
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 8px;
+    animation: zoomIn 0.35s ease-out;
+}
+
+.close-modal {
+    position: absolute;
+    top: 18px;
+    right: 35px;
+    font-size: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.close-modal:hover { color: #ff4d4d; }
+
+@keyframes zoomIn {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ✨ Zoom on Hover for ALL images */
+img, .mobility-pic, .profile-pic {
+    transition: transform 0.35s ease;
+    cursor: pointer;
+}
+
+img:hover, .mobility-pic:hover, .profile-pic:hover {
+    transform: scale(1.07);
+}
+.two-images {
+    display: flex;
+    gap: 6px;
+}
+
+.two-images img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+/* --- Styles spécifiques pour les doubles images dans la grille --- */
+.mobility-image-container.double-pic {
+    display: flex; /* Active l'affichage côte à côte */
+    height: 200px; /* Conserve la hauteur définie pour l'item */
+}
+
+.mobility-image-container.double-pic img.mobility-pic {
+    width: 50%; /* Chaque image prend la moitié de la largeur */
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Ajustement pour l'effet de zoom au survol (important : l'effet doit se faire sur les images individuelles) */
+.mobility-item:hover .mobility-pic {
+    transform: none; /* Désactiver le zoom principal sur le conteneur */
+}
+
+.mobility-item:hover .mobility-image-container.double-pic img.mobility-pic {
+    transform: scale(1.05); /* Appliquer le zoom sur l'image elle-même */
+}
+
+/* Ajustement de l'overlay de lien pour les doubles images */
+.image-link:hover .mobility-image-container.double-pic::after {
+    /* L'overlay doit couvrir tout le conteneur double */
+    width: 100%; 
+    height: 100%;
+}
+/* --- Styles pour les liens de la section Career Development --- */
+.career-links h3 {
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.career-links ul {
+    list-style-type: none; /* Retirer les puces par défaut */
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.career-links ul li {
+    margin-bottom: 10px;
+}
+
+.career-links ul li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.2s;
+}
+
+.career-links ul li a:hover {
+    color: #38761d; /* Une couleur de survol */
+}
+
+.career-links ul li i {
+    margin-right: 10px;
+    width: 20px; /* IMPORTANT: Aligner les icônes pour qu'elles ne décalent pas le texte */
+}
+/* --- Styles pour le FOOTER de Coordonnées --- */
+.footer-contact-bar {
+    background-color: rgba(0, 48, 98, 0.95); /* Bleu foncé semi-transparent */
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+    position: relative; /* Au-dessus de l'animation */
+    z-index: 10;
+    margin-top: 50px; /* Espace après le contenu principal */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; /* Permet le retour à la ligne sur mobile */
+    gap: 25px; /* Espacement entre les coordonnées */
+}
+
+.footer-contact-bar p {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+
+.footer-contact-bar a {
+    color: #a8dadc; /* Couleur claire pour le contraste */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-contact-bar a:hover {
+    color: #fff;
+}
+
+.footer-contact-bar i {
+    margin-right: 8px;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #a8dadc;
+}
+
+/* Responsive pour le Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Empile les coordonnées sur les petits écrans */
+        gap: 10px;
+        text-align: center;
+    }
+}
